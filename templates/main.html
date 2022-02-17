@@ -1,0 +1,114 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'all.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>BMI Calculator</title>
+</head>
+<body class="colorscheme">
+    <!-- <div id="form">
+
+        <form action="{% url 'bmi' %}" method="POST">
+            {% csrf_token %}
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="btnradio1">Male</label>
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="btnradio2">Female</label>
+            </div>
+            <input type="text" name="age">
+            <input type="text" name="height">
+            <input type="text" name="weight">
+            <input type="submit" value=Submit">
+        </form>
+
+    </div>
+    -->
+
+    <div class="form-wrapper">
+        <form action="{% url 'bmi' %}" method="POST">
+            {% csrf_token %}
+            <div class = "bord">
+                <label>
+                    <input type="radio" name="gender" value="Male" checked>
+                    <img src="{% static 'images/male.png' %}" class="image">
+                    <p>Male</p>
+                </label>
+                &nbsp;
+                <label>
+                    <input type="radio" name="gender" value="Female">
+                    <img src="{% static 'images/female.png' %}" class="image">
+                    <p>Female</p>
+                </label>
+            </div>
+            
+
+            <div class = "bord">
+                <h1>Weight</h1>
+                <span id="weightValue">0</span>
+                <h6>(in Kilograms)</h6>
+                <input class="range" type="range" name="weight" value="0" min="0" max="250" onChange="weightSlide(this.value)" onmousemove="weightSlide(this.value)">
+            </div>
+            
+            <div class = "bord">
+                <br>
+                <h1>Height</h1>
+                <span id="feetValue">0</span>
+                <h6>(in Feets)</h6>
+                
+                <input class="range" type="range" name="feet" value="0" min="0" max="10" onChange="feetSlide(this.value)" onmousemove="feettSlide(this.value)">
+
+                <span id="inchValue">0</span>
+                <h6>(in Feets)</h6>
+                <input class="range" type="range" name="inch" value="0" min="0" max="11" onChange="inchSlide(this.value)" onmousemove="inchSlide(this.value)">
+            </div>
+
+            {% if flag == 1 %}
+            <div class = "bord">
+                
+                <h1>Your Body Mass Index is : </h1>
+                <h3>{{result}}</h3>
+                {% if result > 0 %}
+                <h3>{{str}}</h3>
+                {% endif %}
+            </div>
+            {% endif %}
+            
+            <input type="submit" value="Calculate BMI">
+            
+        </form>
+        
+    </div>
+    
+
+
+
+
+    <script type="text/javascript">
+        function weightSlide(value) {
+            document.getElementById('weightValue').innerHTML = value;
+        }
+
+        function feetSlide(value) {
+            document.getElementById('feetValue').innerHTML = value;
+        }
+
+        function inchSlide(value) {
+            document.getElementById('inchValue').innerHTML = value;
+        }
+
+        function increament(id){
+            document.getElementsByName(id).innerHTML++;
+        }
+
+        function decrement(id){
+            document.getElementById(id).innerHTML--;
+        }
+    </script>
+  
+</body>
+</html>

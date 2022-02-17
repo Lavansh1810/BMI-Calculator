@@ -1,0 +1,10 @@
+body {
+    background-color: #181c3b;
+}
+
+#form
+{
+    display: inline-flex;
+    text-align: center;
+    background-color: aquamarine;
+}
